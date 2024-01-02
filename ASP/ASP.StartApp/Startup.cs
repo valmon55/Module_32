@@ -38,9 +38,9 @@ namespace ASP.StartApp
             });
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/config", async context =>
+                endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync($"App name: {env.ApplicationName}. App running configuration: {env.EnvironmentName}");
+                    await context.Response.WriteAsync($"Welcome to the {env.ApplicationName}!");
                 });
             });
             // Все прочие страницы имеют отдельные обработчики
