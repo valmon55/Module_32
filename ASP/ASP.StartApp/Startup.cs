@@ -21,7 +21,7 @@ namespace ASP.StartApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsStaging() )
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -34,6 +34,7 @@ namespace ASP.StartApp
                 {
                     //var z = 0;
                     //var res = 1 / z;
+                    
                     await context.Response.WriteAsync($"Hello World! Configure: {env.EnvironmentName}");
                 });
             });
