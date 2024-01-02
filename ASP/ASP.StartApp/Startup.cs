@@ -33,16 +33,16 @@ namespace ASP.StartApp
 
             app.UseRouting();
 
-            app.Use(async (context, next) =>
-            {
-                // Строка для публикации в лог
-                string logMessage = $"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}{Environment.NewLine}";
+            //app.Use(async (context, next) =>
+            //{
+            //    // Строка для публикации в лог
+            //    string logMessage = $"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}{Environment.NewLine}";
 
-                // Путь до лога (опять-таки, используем свойства IWebHostEnvironment)
-                string logFilePath = Path.Combine(env.ContentRootPath, "Logs", "RequestLog.txt");
-                await File.AppendAllTextAsync(logFilePath, logMessage);
-                await next.Invoke();
-            });
+            //    // Путь до лога (опять-таки, используем свойства IWebHostEnvironment)
+            //    string logFilePath = Path.Combine(env.ContentRootPath, "Logs", "RequestLog.txt");
+            //    await File.AppendAllTextAsync(logFilePath, logMessage);
+            //    await next.Invoke();
+            //});
             app.UseMiddleware<LoggingMiddleware>();
             //app.Use(async (context, next) =>
             //{
