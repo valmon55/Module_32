@@ -1,3 +1,4 @@
+using ASP.StartApp.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -42,12 +43,13 @@ namespace ASP.StartApp
                 await File.AppendAllTextAsync(logFilePath, logMessage);
                 await next.Invoke();
             });
-            app.Use(async (context, next) =>
-            {
-                // Для логирования данных о запросе используем свойства объекта HttpContext
-                Console.WriteLine($"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}");
-                await next.Invoke();
-            });
+            app.UseMiddleware<LoggingMiddleware>();
+            //app.Use(async (context, next) =>
+            //{
+            //    // Для логирования данных о запросе используем свойства объекта HttpContext
+            //    Console.WriteLine($"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}");
+            //    await next.Invoke();
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
@@ -86,14 +88,5 @@ namespace ASP.StartApp
                 await context.Response.WriteAsync($"App name: {env.ApplicationName}. App running configuration: {env.EnvironmentName}");
             });
         }
-        private static void Log(IApplicationBuilder app)
-        {
-           
-            app.Run(async context =>
-            {
-                
-            });
-        }
-
     }
 }
