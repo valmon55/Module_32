@@ -32,7 +32,9 @@ namespace ASP.StartApp
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    //var z = 0;
+                    //var res = 1 / z;
+                    await context.Response.WriteAsync($"Hello World! Configure: {env.EnvironmentName}");
                 });
             });
         }
