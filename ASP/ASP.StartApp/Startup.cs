@@ -33,6 +33,8 @@ namespace ASP.StartApp
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             //app.Use(async (context, next) =>
             //{
             //    // Строка для публикации в лог
@@ -83,6 +85,7 @@ namespace ASP.StartApp
         /// </summary>
         private static void Config(IApplicationBuilder app)
         {
+            //Console.WriteLine($"Launching project from: {env.ContentRootPath}");
             app.Run(async context =>
             {
                 await context.Response.WriteAsync($"App name: {env.ApplicationName}. App running configuration: {env.EnvironmentName}");
