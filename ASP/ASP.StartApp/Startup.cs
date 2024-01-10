@@ -34,7 +34,7 @@ namespace ASP.StartApp
             app.UseRouting();
 
             app.UseStaticFiles();
-
+            app.UseStatusCodePages();
             //app.Use(async (context, next) =>
             //{
             //    // Строка для публикации в лог
@@ -66,6 +66,8 @@ namespace ASP.StartApp
             // Обработчик для ошибки "страница не найдена"
             app.Run(async (context) =>
             {
+                //int zero = 0;
+                //int result = 4 / zero;
                 await context.Response.WriteAsync($"Page not found");
             });
         }
